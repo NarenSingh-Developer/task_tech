@@ -1,0 +1,95 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AuthResponse {
+  accessToken: String!
+  user: User!
+}
+
+type Availability {
+  createdAt: DateTime!
+  date: String!
+  endTime: String!
+  id: ID!
+  startTime: String!
+  user: User!
+}
+
+input BookSlotInput {
+  date: String!
+  slug: String!
+  startTime: String!
+  visitorEmail: String!
+  visitorName: String!
+}
+
+type Booking {
+  bookingLink: BookingLink!
+  createdAt: DateTime!
+  date: String!
+  endTime: String!
+  id: ID!
+  startTime: String!
+  visitorEmail: String!
+  visitorName: String!
+}
+
+type BookingLink {
+  createdAt: DateTime!
+  id: ID!
+  isActive: Boolean!
+  slug: String!
+  user: User!
+}
+
+input CreateAvailabilityInput {
+  date: String!
+  endTime: String!
+  startTime: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type Mutation {
+  bookSlot(bookSlotInput: BookSlotInput!): Booking!
+  createAvailability(createAvailabilityInput: CreateAvailabilityInput!): Availability!
+  generateBookingLink: BookingLink!
+  login(loginInput: LoginInput!): AuthResponse!
+  register(registerInput: RegisterInput!): AuthResponse!
+  removeAvailability(id: ID!): Boolean!
+}
+
+type Query {
+  availableSlots(date: String!, slug: String!): [TimeSlot!]!
+  bookingLink(slug: String!): BookingLink!
+  myAvailability: [Availability!]!
+  myBookingLinks: [BookingLink!]!
+}
+
+input RegisterInput {
+  email: String!
+  name: String!
+  password: String!
+}
+
+type TimeSlot {
+  endTime: String!
+  isAvailable: Boolean!
+  startTime: String!
+}
+
+type User {
+  createdAt: DateTime!
+  email: String!
+  id: ID!
+  name: String!
+}
